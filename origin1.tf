@@ -1,5 +1,5 @@
 resource "random_id" "namespace1" {
-  prefix      = "demo-core-"
+  prefix      = "sperciballi-box-"
   byte_length = 2
 }
 
@@ -12,7 +12,7 @@ resource "google_compute_instance" "origin" {
   name         = random_id.namespace1.hex
   machine_type = var.machine_type
   zone         = var.zone1
-  tags         = ["http-server", "ssh", "https-server"]
+  tags         = ["sperciballi", "ssh", "https-server"]
 
   boot_disk {
     initialize_params {
@@ -33,14 +33,6 @@ resource "google_compute_instance" "origin" {
   }
 
   metadata_startup_script = data.template_file.server1.rendered
-
-  metadata = {
-      cf-terraform = "demo-core-"
-      cf-email = var.cloudflare_email
-      cf-zone = var.cloudflare_zone
-  } 
-
-}
 
 
 # Renders the data value passed above in metadata_startup_script
