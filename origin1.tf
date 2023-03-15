@@ -19,7 +19,7 @@ resource "google_compute_instance" "origin1" {
       image = data.google_compute_image.image.self_link
     }
   }
-  
+}
   network_interface {
     network = "default"
     access_config {
