@@ -8,7 +8,7 @@ data "google_compute_image" "image" {
   project = "ubuntu-os-cloud"
 }
 
-resource "google_compute_instance" "origin" {
+resource "google_compute_instance" "origin1" {
   name         = random_id.namespace1.hex
   machine_type = var.machine_type
   zone         = var.zone1
