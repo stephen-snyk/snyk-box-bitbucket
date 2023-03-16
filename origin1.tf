@@ -26,15 +26,17 @@ resource "google_compute_instance" "origin1" {
       // Ephemeral IP
     }
   }
-}
-
-# Renders the data value passed above in metadata_startup_script
-data "template_file" "server1" {
-  template = file("./server.tpl")
-
-  vars = {
+  metadata_startup_script = data.template_file.server.rendered
+  metadata = {
+      snyk-terraform = "sperciballi-box"
   }
 }
+
+
+# Renders the data value passed above in metadata_startup_script
+data "template_file" "server" {
+  template = "${file("${path.module}/server.tpl")}"
+  }
 
 output "public_ip1" {
   value = google_compute_instance.origin1.network_interface[0]
