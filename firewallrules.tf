@@ -1,17 +1,25 @@
-resource "google_project" "snyk-cx-se-demo" {
-  name       = "tf-test-project"
-  project_id = "ae-project"
-  org_id     = "123456789"
-}
+module "firewall_rules" {
+  source       = "terraform-google-modules/network/google//modules/firewall-rules"
+  project_id   = var.gcp_project_id
+  network_name = "default"
 
-resource "google_app_engine_application" "app" {
-  project     = google_project.my_project.project_id
-  location_id = "us-central"
-}
-
-resource "google_app_engine_firewall_rule" "rule" {
-  project      = google_app_engine_application.app.project
-  priority     = 1000
-  action       = "ALLOW"
-  source_range = "*"
+  rules = [{
+    name                    = "sperciballi-box"
+    description             = null
+    direction               = "INGRESS"
+    priority                = null
+    ranges                  = ["69.165.159.114/32"]
+    source_tags             = null
+    source_service_accounts = null
+    target_tags             = ["sperciballi"]
+    target_service_accounts = null
+    allow = [{
+      protocol = "tcp"
+      ports    = [22,80,8080,443,7990]
+    }]
+    deny = []
+    log_config = {
+      metadata = "INCLUDE_ALL_METADATA"
+    }
+  }]
 }
