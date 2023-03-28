@@ -13,3 +13,18 @@ variable "machine_type" {
   description = "GCP VM instance machine type."
   type        = string
 }
+
+variable "snyk_broker_token" {
+  description = "Snyk Broker Token"
+  type	      = string
+}
+
+variable "bitbucket_username" {
+  description = "Bitbucket username"
+  type        = string
+}
+
+variable "bitbucket_password" {
+  description = "Bitbucket password"
+  type        = string
+}

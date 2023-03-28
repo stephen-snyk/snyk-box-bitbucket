@@ -36,7 +36,13 @@ resource "google_compute_instance" "origin1" {
 # Renders the data value passed above in metadata_startup_script
 data "template_file" "server" {
   template = "${file("${path.module}/server.tpl")}"
+  vars =  {
+    snyk_broker_token = "${var.snyk_broker_token}"
+    bitbucket_username = "${var.bitbucket_username}"
+    bitbucket_password = "${var.bitbucket_password}"
+#    network_ip = "${google_compute_instance.origin1.network_interface[0].network_ip}"
   }
+}
 
 output "public_ip1" {
   value = google_compute_instance.origin1.network_interface[0]
