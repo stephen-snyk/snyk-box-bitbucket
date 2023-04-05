@@ -40,7 +40,8 @@ data "template_file" "server" {
     snyk_broker_token = "${var.snyk_broker_token}"
     bitbucket_username = "${var.bitbucket_username}"
     bitbucket_password = "${var.bitbucket_password}"
-#    network_ip = "${google_compute_instance.origin1.network_interface[0].network_ip}"
+    pub_ip = "{google_compute_instance.origin1.network_interface[0]}"
+#    network_ip = "${var.public_ip}"
   }
 }
 

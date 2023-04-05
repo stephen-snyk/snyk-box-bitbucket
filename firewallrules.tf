@@ -8,7 +8,7 @@ module "firewall_rules" {
     description             = null
     direction               = "INGRESS"
     priority                = null
-    ranges                  = ["69.165.159.114/32"]
+    ranges                  = [var.my_subnet]
     source_tags             = null
     source_service_accounts = null
     target_tags             = ["sperciballi"]

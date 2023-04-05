@@ -28,3 +28,8 @@ variable "bitbucket_password" {
   description = "Bitbucket password"
   type        = string
 }
+
+variable "my_subnet" {
+  description = "Source IP address for GCP firewall"
+  type        = string
+}
