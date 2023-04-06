@@ -9,6 +9,11 @@ variable "zone1" {
   type        = string
 }
 
+variable "region1" {
+  description = "GCP region name."
+  type        = string
+}
+
 variable "machine_type" {
   description = "GCP VM instance machine type."
   type        = string

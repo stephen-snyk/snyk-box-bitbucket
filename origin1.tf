@@ -24,6 +24,7 @@ resource "google_compute_instance" "origin1" {
     network = "default"
     access_config {
       // Ephemeral IP
+      nat_ip = google_compute_address.default.address
     }
   }
   metadata_startup_script = data.template_file.server.rendered
@@ -40,8 +41,7 @@ data "template_file" "server" {
     snyk_broker_token = "${var.snyk_broker_token}"
     bitbucket_username = "${var.bitbucket_username}"
     bitbucket_password = "${var.bitbucket_password}"
-    pub_ip = "{google_compute_instance.origin1.network_interface[0]}"
-#    network_ip = "${var.public_ip}"
+    pub_ip = "${google_compute_address.default.address}"
   }
 }
 
