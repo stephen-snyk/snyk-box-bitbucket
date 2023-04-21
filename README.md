@@ -22,7 +22,7 @@ The Prerequisites and Instructions are critical to making this work.
 ## Instructions
 <br>
 
-1. Clone the repository ``` git clone https://github.com/stephen-snyk/snyk-box.git```,  and cd into the directory.
+1. Clone the repository ``` git clone https://github.com/stephen-snyk/snyk-box.git```,  and cd into the directory. There is a .gitignore file so your tfvars and plan should not be pushed to the SCM.
 
 
 2. Edit terraform.tfvars 
