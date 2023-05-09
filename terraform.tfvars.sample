@@ -1,0 +1,9 @@
+gcp_project_id = "snyk-cx-se-demo"
+zone1 = "northamerica-northeast2-a"
+region1 = "northamerica-northeast2"
+machine_type = "e2-standard-4"
+snyk_broker_token = "<token>"
+bitbucket_username = "<username>"
+bitbucket_password = "<password you will use>"
+public_ip = google_compute_instance.origin1.network_interface[0]
+my_subnet = "<IP address in CIDR>"
