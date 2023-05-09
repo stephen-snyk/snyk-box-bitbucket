@@ -17,6 +17,7 @@ resource "google_compute_instance" "origin1" {
   boot_disk {
     initialize_params {
       image = data.google_compute_image.image.self_link
+      size = "15"
     }
   }
 
