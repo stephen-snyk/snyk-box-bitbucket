@@ -4,7 +4,7 @@ resource "random_id" "namespace1" {
 }
 
 data "google_compute_image" "image" {
-  family  = "ubuntu-minimal-1804-lts"
+  family  = "ubuntu-minimal-2204-lts"
   project = "ubuntu-os-cloud"
 }
 
