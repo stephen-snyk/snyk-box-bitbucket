@@ -5,12 +5,11 @@ The Prerequisites and Instructions are critical to making this work.
 
 
 ## What it builds today:
-* Instantiate and update a linux host in GCP.
-* Create a firewall rule to permit the most relevant ports for these applications from your home IP.
-* Install Docker.
-* Build a Bitbucket container.
-* Configure Bitbucket to run HTTPS rather than HTTP so that Broker works.
-* Build a Snyk Broker for Bitbucket container.
+* Instantiate and update a linux host in GCP with a public IP address, ```origin.tf``` and ```nat_ip.tf```.
+* Create firewall rules to permit the most relevant ports for these applications from your home IP ```firewallrules.tf```.
+* Install Docker, ```server.tpl```.
+* Build a Bitbucket container, found in the folder ```bitbucket```. The reason for the custom container is that it enables SSL (required for Broker), and generates SSL certificates that are imported into the container, ```server.tpl```.
+* Build a Snyk Broker container for Bitbucket container, ```server.tpl```.
 
 
 ## Prerequisites
@@ -20,18 +19,16 @@ The Prerequisites and Instructions are critical to making this work.
 3. Sign up for a Bitbucket account if you don't have one.
 
 ## Instructions
-<br>
 
-1. Clone the repository ``` git clone https://github.com/stephen-snyk/snyk-box.git```,  and cd into the directory. There is a .gitignore file so your tfvars and plan should not be pushed to the SCM.
+
+1. Clone the repository ``` git clone https://github.com/stephen-snyk/snyk-box-bitbucket.git```,  and cd into the directory. There is a .gitignore file so your tfvars and plan should not be pushed to the SCM.
 
 
 2. Edit terraform.tfvars 
 
-    You can change the region, zone, and machine type but the ones in the sample file work fine.
-
-    We are setting the Bitbucket credentials here so that we can automate the Broker configuration. So just be sure that when you are configuring Bitbucket and creating the user you create an account with the credentials set here.
-
-    Setting your public IP address will keep the environment more secure and our security team happier.
+    * You can change the region, zone, and machine type but the ones in the sample file work fine.
+    * Set the Bitbucket credentials here so that we can automate the Broker configuration. So just be sure that when you are are able to login to Bitbucket and creating the user you create an account with the credentials set here.
+    * Setting your public IP address in ```my_subnet``` will keep the environment more secure and our security team happier.
 
 
 3. Instantiate Terraform
@@ -70,4 +67,4 @@ The Prerequisites and Instructions are critical to making this work.
     terraform destroy
     ```
 
-When iterating through changes, you will just have to edit files, terraform plan, terraform apply, and terraform destroy when done.
+If you need to make changes it is best to practice the changes in the running environment. Once you know how to implement them correctly destroy the currently running environment first. Then make changes (most likely in server.tpl) and go back to ```terraform plan```, ```terraform apply``` to build the new version.
