@@ -18,13 +18,13 @@ docker run -d --restart=always \
            -p 8000:8000 \
            -e BROKER_TOKEN="${snyk_broker_token}" \
            -e BITBUCKET_USERNAME="${bitbucket_username}" \
-           -e BITBUCKET_PASSWORD="${bitbucket_password}" \
+           -e BITBUCKET_PAT="${bitbucket_pat}" \
            -e BITBUCKET=${pub_ip}:443 \
            -e BITBUCKET_API=`hostname -i`:443/rest/api/1.0 \
            -e PORT=8000 \
-           -e BROKER_CLIENT_URL=http://localhost:8000 \
+           -e BROKER_CLIENT_URL=http://`hostname -i`:8000 \
            -e ACCEPT_IAC=tf,yaml,yml,json,tpl \
            -e ACCEPT_CODE=true \
            -e NODE_TLS_REJECT_UNAUTHORIZED=0 \
-       snyk/broker:bitbucket-server
+       snyk/broker:bitbucket-server-bearer-auth
 EOF
